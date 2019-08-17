@@ -52,6 +52,7 @@ class Game extends React.Component {
             history: [{
                 squares: Array(9).fill(null),
                 xIsNext: true,
+                moveDescription: "Empty board",
             }],   
             stepNumber: 0,
         }
@@ -67,10 +68,12 @@ class Game extends React.Component {
         }
 
         squares[i] = current.xIsNext ? "X" : "O";
+        const moveDescription = squares[i] + " marked box [" + (i % 3) + ", " + ((i - (i % 3)) / 3) + "]";
         this.setState({
             history: history.concat([{
                 squares: squares,
                 xIsNext: !current.xIsNext,
+                moveDescription: moveDescription,
             }]),
             stepNumber: history.length,
         });
@@ -96,7 +99,7 @@ class Game extends React.Component {
         }       
         
         const historyButtons = history.map((value, index) => {
-            const description = index > 0 ? "Go to move #" + index : "Go to game start";
+            const description = "Go to move #" + index + " (" + value.moveDescription + ")";
             return (
                 <li key={index}>
                     <button onClick={() => this.jumpTo(index)}>{description}</button>
