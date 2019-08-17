@@ -100,12 +100,13 @@ class Game extends React.Component {
         
         const historyButtons = history.map((value, index) => {
             const description = "Go to move #" + index + " (" + value.moveDescription + ")";
+            const pointer = this.state.stepNumber == index ? " <- here we are " : "";
             return (
                 <li key={index}>
-                    <button onClick={() => this.jumpTo(index)}>{description}</button>
+                    <button onClick={() => this.jumpTo(index)}>{description}</button>{pointer}
                 </li>
             );
-        });
+        }, this);
 
         return (
             <div className="game">
