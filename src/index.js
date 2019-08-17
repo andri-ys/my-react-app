@@ -53,11 +53,12 @@ class Game extends React.Component {
                 squares: Array(9).fill(null),
                 xIsNext: true,
             }],   
+            stepNumber: 0,
         }
     }
 
     handleClick(i){
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
 
@@ -71,12 +72,19 @@ class Game extends React.Component {
                 squares: squares,
                 xIsNext: !current.xIsNext,
             }]),
+            stepNumber: history.length,
         });
     }
     
+    jumpTo(index){
+        this.setState({
+            stepNumber: index            
+        });
+    }
+
     render() {
         const history = this.state.history;
-        const current = history[history.length - 1];
+        const current = history[this.state.stepNumber];
 
         const winner = calculateWinner(current.squares);
         let status;
@@ -85,7 +93,16 @@ class Game extends React.Component {
             status = "Winner: " + winner;
         }else{
             status = "Next player: " + (current.xIsNext ? "X" : "O");
-        }        
+        }       
+        
+        const historyButtons = history.map((value, index) => {
+            const description = index > 0 ? "Go to move #" + index : "Go to game start";
+            return (
+                <li key={index}>
+                    <button onClick={() => this.jumpTo(index)}>{description}</button>
+                </li>
+            );
+        });
 
         return (
             <div className="game">
@@ -95,9 +112,9 @@ class Game extends React.Component {
                         onClick={(i) => this.handleClick(i)}                        
                     />
                 </div>
-                <div className="game-info">
+                <div className="game-info">                    
                     <div>{status}</div>
-                    <ol>{/* TODO */}</ol>
+                    <ol>{historyButtons}</ol>
                 </div>
             </div>
         );
