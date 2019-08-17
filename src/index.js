@@ -54,6 +54,7 @@ class Game extends React.Component {
                 squares: Array(9).fill(null),
                 xIsNext: true,
                 moveDescription: "Empty board",
+                winner: null,
             }],   
             stepNumber: 0,
             isReverse: false,
@@ -70,10 +71,15 @@ class Game extends React.Component {
         }
 
         squares[i] = current.xIsNext ? "X" : "O";
-        let winner = calculateWinner(squares);
         let moveDescription = squares[i] + " marked box [" + (i % 3) + ", " + ((i - (i % 3)) / 3) + "]";
+        let winner = calculateWinner(squares);
         if (winner){
             moveDescription += ", " + winner.name + " wins!";
+        }else{
+            // let emptySquares = squares.filter(x => x == null);
+            // if (emptySquares.length == 0){
+            //     moveDescription += ", " + " ==Game over, it's a draw!==";
+            // }
         }
         this.setState({
             history: history.concat([{
@@ -102,7 +108,11 @@ class Game extends React.Component {
         if (winner){
             status = "Winner: " + winner.name;
         }else{
-            status = "Next player: " + (current.xIsNext ? "X" : "O");
+            if (current.squares.filter(x => x == null).length == 0){
+                status = "Game over, it's a draw";
+            }else{
+                status = "Next player: " + (current.xIsNext ? "X" : "O");
+            }
         }       
         
         let historyButtons = history.map((value, index) => {
