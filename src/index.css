@@ -55,3 +55,7 @@ ul {
 .selected {
     font-weight: bold;
 }
+
+.hilite {
+    background-color: yellow;
+}
