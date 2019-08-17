@@ -76,10 +76,10 @@ class Game extends React.Component {
         if (winner){
             moveDescription += ", " + winner.name + " wins!";
         }else{
-            // let emptySquares = squares.filter(x => x == null);
-            // if (emptySquares.length == 0){
-            //     moveDescription += ", " + " ==Game over, it's a draw!==";
-            // }
+            let emptySquares = squares.filter(x => x == null);
+            if (emptySquares.length == 0){
+                moveDescription += ", Game over!";
+            }
         }
         this.setState({
             history: history.concat([{
