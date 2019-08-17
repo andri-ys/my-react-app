@@ -55,6 +55,7 @@ class Game extends React.Component {
                 moveDescription: "Empty board",
             }],   
             stepNumber: 0,
+            isReverse: false,
         }
     }
 
@@ -102,7 +103,7 @@ class Game extends React.Component {
             status = "Next player: " + (current.xIsNext ? "X" : "O");
         }       
         
-        const historyButtons = history.map((value, index) => {
+        let historyButtons = history.map((value, index) => {
             const description = value.moveDescription;
             return (
                 <li key={index}>
@@ -114,6 +115,10 @@ class Game extends React.Component {
             );
         }, this);
 
+        if (this.state.isReverse){
+            historyButtons = historyButtons.slice().reverse();
+        }
+
         return (
             <div className="game">
                 <div className="game-board">
@@ -124,6 +129,9 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">                    
                     <div>{status}</div>
+                    <button onClick={() => this.setState({ isReverse: !this.state.isReverse})}>
+                        {this.state.isReverse ? "newest first" : "oldest first"}
+                    </button>
                     <ol>{historyButtons}</ol>
                 </div>
             </div>
