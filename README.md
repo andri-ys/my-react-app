@@ -2,7 +2,14 @@
 
 This is the result of me following this [tutorial](https://reactjs.org/tutorial/tutorial.html).
 
-It is an interactive tic-tac-toe game. I'm also implementing all improvements suggested in the tutorial, i.e :
+It is an interactive tic-tac-toe game, with the following features :
+
+* Lets you play tic-tac-toe,
+* Indicates when a player has won the game,
+* Stores a game’s history as a game progresses,
+* Allows players to review a game’s history and see previous versions of a game’s board.
+
+I'm also implementing all improvements suggested in the tutorial, i.e :
 
 1. Display the location for each move in the format (col, row) in the move history list.
 1. Bold the currently selected item in the move list.
@@ -11,6 +18,7 @@ It is an interactive tic-tac-toe game. I'm also implementing all improvements su
 1. When someone wins, highlight the three squares that caused the win.
 1. When no one wins, display a message about the result being a draw.
 
+It sure is a fun way to learn new technologies :-)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
