@@ -77,7 +77,7 @@ class Game extends React.Component {
             moveDescription += ", " + winner.name + " wins!";
         }else{
             let emptySquares = squares.filter(x => x == null);
-            if (emptySquares.length == 0){
+            if (emptySquares.length === 0){
                 moveDescription += ", Game over!";
             }
         }
@@ -108,7 +108,7 @@ class Game extends React.Component {
         if (winner){
             status = "Winner: " + winner.name;
         }else{
-            if (current.squares.filter(x => x == null).length == 0){
+            if (current.squares.filter(x => x === null).length === 0){
                 status = "Game over, it's a draw";
             }else{
                 status = "Next player: " + (current.xIsNext ? "X" : "O");
@@ -120,7 +120,7 @@ class Game extends React.Component {
             return (
                 <li key={index}>
                     <button 
-                        className={this.state.stepNumber == index ? "selected" : ""} 
+                        className={this.state.stepNumber === index ? "selected" : ""} 
                         onClick={() => this.jumpTo(index)}>{description}
                     </button>
                 </li>
