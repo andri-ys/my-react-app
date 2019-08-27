@@ -16,6 +16,7 @@ class Board extends React.Component {
     renderSquare(i) {
         return ( 
             <Square 
+                key = {i}
                 value = {this.props.squares[i]} 
                 onClick = {() => this.props.onClick(i)} 
                 hilite = {this.props.winner && this.props.winner.squares.includes(i)} 
@@ -32,7 +33,7 @@ class Board extends React.Component {
                 squares.push(this.renderSquare((3 * i) + j));
             }
             rows.push(
-                <div className="board-row">
+                <div key={i} className="board-row">
                     {squares}
                 </div> 
             );
